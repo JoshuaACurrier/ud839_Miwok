@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by jtike on 3/5/2018.
+ * Created by Josh Currier on 3/5/2018.
  */
 
 public class WordAdapter extends ArrayAdapter<Word>{
@@ -35,6 +35,7 @@ public class WordAdapter extends ArrayAdapter<Word>{
 
         TextView englishText = (TextView) listItemView.findViewById(R.id.englishWord);
 
+        assert word != null;
         englishText.setText(word.getmDefaultTranslation());
 
         TextView miwokText = (TextView) listItemView.findViewById(R.id.miwokWord);
