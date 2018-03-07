@@ -8,11 +8,19 @@ public class Word {
 
     private String mDefaultTranslation;
     private String mMiwokTranslation;
+    private int mImageResourceID;
 
-    public Word(String toDefaultTranslation, String toMiwokTranslation)
+    public Word(String toDefaultTranslation, String toMiwokTranslation){
+        mDefaultTranslation = toDefaultTranslation;
+        mMiwokTranslation = toMiwokTranslation;
+        mImageResourceID = 0;
+    }
+
+    public Word(String toDefaultTranslation, String toMiwokTranslation, int toImageFile)
     {
         mDefaultTranslation = toDefaultTranslation;
         mMiwokTranslation = toMiwokTranslation;
+        mImageResourceID = toImageFile;
     }
 
     public String getmDefaultTranslation()
@@ -23,6 +31,10 @@ public class Word {
     public String getmMiwokTranslation()
     {
         return mMiwokTranslation;
+    }
+
+    public int getImageResourceID(){
+        return mImageResourceID;
     }
 
 
