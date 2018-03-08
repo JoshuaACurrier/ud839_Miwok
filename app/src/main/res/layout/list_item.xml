@@ -2,33 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="16dp"
-    android:paddingLeft="16dp">
+    android:layout_height="88dp">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="88dp"
         android:layout_height="match_parent"
         android:src="@mipmap/ic_launcher"
         android:id="@+id/image"
-        android:paddingRight="16dp"/>
+        android:scaleType="centerCrop"
+        android:background="#FFF7DA"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/textWords">
+        android:id="@+id/textWords"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:background="#FD8E09"
+        android:paddingLeft="16dp">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="miwok Word 1"
-        android:id="@+id/miwokWord"/>
+        android:id="@+id/miwokWord"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="english Word 1"
-        android:id="@+id/englishWord"/>
+        android:id="@+id/englishWord"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"/>
 
     </LinearLayout>
 

@@ -22,6 +22,8 @@
     android:orientation="vertical"
     tools:context="com.example.android.miwok.MainActivity">
 
+
+
     <TextView
         android:id="@+id/numbers"
         style="@style/CategoryStyle"
@@ -45,5 +47,11 @@
         style="@style/CategoryStyle"
         android:background="@color/category_phrases"
         android:text="@string/category_phrases" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/tan_background"/>
 
 </LinearLayout>
