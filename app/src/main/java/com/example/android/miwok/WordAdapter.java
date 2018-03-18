@@ -38,6 +38,7 @@ public class WordAdapter extends ArrayAdapter<Word>{
                     R.layout.list_item, parent, false);
         }
 
+
         Word word = getItem(position);
 
 
