@@ -9,18 +9,21 @@ public class Word {
     private String mDefaultTranslation;
     private String mMiwokTranslation;
     private int mImageResourceID;
+    private int mAudioFileID;
 
-    public Word(String toDefaultTranslation, String toMiwokTranslation){
+    public Word(String toDefaultTranslation, String toMiwokTranslation, int toAudioFile){
         mDefaultTranslation = toDefaultTranslation;
         mMiwokTranslation = toMiwokTranslation;
         mImageResourceID = 0;
+        mAudioFileID = toAudioFile;
     }
 
-    public Word(String toDefaultTranslation, String toMiwokTranslation, int toImageFile)
+    public Word(String toDefaultTranslation, String toMiwokTranslation, int toImageFile, int toAudioFile)
     {
         mDefaultTranslation = toDefaultTranslation;
         mMiwokTranslation = toMiwokTranslation;
         mImageResourceID = toImageFile;
+        mAudioFileID = toAudioFile;
     }
 
     public String getmDefaultTranslation()
@@ -36,6 +39,8 @@ public class Word {
     public int getImageResourceID(){
         return mImageResourceID;
     }
+
+    public int getmAudioFileID() { return mAudioFileID;}
 
 
 }

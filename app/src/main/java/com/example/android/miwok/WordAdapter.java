@@ -2,6 +2,7 @@ package com.example.android.miwok;
 
 import android.app.Activity;
 
+import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class WordAdapter extends ArrayAdapter<Word>{
         }
 
         Word word = getItem(position);
+
 
         View containerView = listItemView.findViewById(R.id.textWords);
 
