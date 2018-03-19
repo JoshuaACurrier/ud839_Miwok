@@ -26,7 +26,13 @@ import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
 
-    MediaPlayer mMediaPlayer;
+    private MediaPlayer mMediaPlayer;
+    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,30 +58,29 @@ public class NumbersActivity extends AppCompatActivity {
         if (listView != null) {
             listView.setAdapter(itemsAdapter);
 
-            if (listView != null) {
-                listView.setAdapter(itemsAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long rowID) {
-                        releaseMediaPlayer();
-                        Word word = words.get(position);
-                        mMediaPlayer = MediaPlayer.create(NumbersActivity.this,word.getmAudioFileID());
-                        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mediaPlayer) {
-                                releaseMediaPlayer();
-                            }
-                        });
-                        mMediaPlayer.start();
+            listView.setAdapter(itemsAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long rowID) {
+                    releaseMediaPlayer();
+                    Word word = words.get(position);
+                    mMediaPlayer = MediaPlayer.create(NumbersActivity.this,word.getmAudioFileID());
+                    mMediaPlayer.setOnCompletionListener(onCompletionListener);
+                    mMediaPlayer.start();
 
 
-                    }
-                });
+                }
+            });
 
 
-            }
         }
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
     }
 
     private void releaseMediaPlayer(){

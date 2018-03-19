@@ -16,9 +16,8 @@
 package com.example.android.miwok;
 
 import android.media.MediaPlayer;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,6 +27,12 @@ import java.util.ArrayList;
 public class ColorsActivity extends AppCompatActivity {
 
     private MediaPlayer mMediaPlayer;
+    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,7 @@ public class ColorsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.word_list);
 
-            final ArrayList<Word> words = new ArrayList<Word>();
+            final ArrayList<Word> words = new ArrayList<>();
             words.add(new Word("red","weṭeṭṭi",R.drawable.color_red,R.raw.color_red));
             words.add(new Word("green","chokokki",R.drawable.color_green,R.raw.color_green));
             words.add(new Word("brown","ṭakaakki",R.drawable.color_brown,R.raw.color_brown));
@@ -57,12 +62,7 @@ public class ColorsActivity extends AppCompatActivity {
                         releaseMediaPlayer();
                         Word word = words.get(position);
                         mMediaPlayer = MediaPlayer.create(ColorsActivity.this,word.getmAudioFileID());
-                        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mediaPlayer) {
-                                releaseMediaPlayer();
-                            }
-                        });
+                        mMediaPlayer.setOnCompletionListener(onCompletionListener);
                         mMediaPlayer.start();
 
 
@@ -73,6 +73,12 @@ public class ColorsActivity extends AppCompatActivity {
             }
 
         }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
 
     private void releaseMediaPlayer(){
         if(mMediaPlayer != null)

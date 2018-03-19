@@ -26,14 +26,20 @@ import java.util.ArrayList;
 
 public class FamilyActivity extends AppCompatActivity {
 
-    MediaPlayer mMediaPlayer;
+    private MediaPlayer mMediaPlayer;
+    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
 
-        final ArrayList<Word> words = new ArrayList<Word>();
+        final ArrayList<Word> words = new ArrayList<>();
         words.add(new Word("father","әpә",R.drawable.family_father,R.raw.family_father));
         words.add(new Word("mother","әṭa",R.drawable.family_mother,R.raw.family_mother));
         words.add(new Word("son","angsi",R.drawable.family_son,R.raw.family_son));
@@ -52,29 +58,28 @@ public class FamilyActivity extends AppCompatActivity {
         if (listView != null) {
             listView.setAdapter(itemsAdapter);
 
-            if (listView != null) {
-                listView.setAdapter(itemsAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long rowID) {
-                        releaseMediaPlayer();
-                        Word word = words.get(position);
-                        mMediaPlayer = MediaPlayer.create(FamilyActivity.this,word.getmAudioFileID());
-                        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mediaPlayer) {
-                                releaseMediaPlayer();
-                            }
-                        });
+            listView.setAdapter(itemsAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long rowID) {
+                    releaseMediaPlayer();
+                    Word word = words.get(position);
+                    mMediaPlayer = MediaPlayer.create(FamilyActivity.this,word.getmAudioFileID());
+                    mMediaPlayer.setOnCompletionListener(onCompletionListener);
 
-                        mMediaPlayer.start();
-                    }
-                });
+                    mMediaPlayer.start();
+                }
+            });
 
 
-            }
         }
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
     }
 
     private void releaseMediaPlayer(){
